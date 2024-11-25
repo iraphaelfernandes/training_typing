@@ -20,7 +20,7 @@ const Footer = () => {
         <div className='flex items-center justify-center '>
           <Tooltip tooltipId='Github'>
             <Social
-              url='http://github.com/Estifanos12'
+              url='https://github.com/iraphaelfernandes/training_typing'
               tooltipContent='Github'
               tooltipId='Github'
             >
@@ -29,7 +29,7 @@ const Footer = () => {
           </Tooltip>
           <Tooltip tooltipId='whatsapp'>
             <Social
-              url='https://wa.link/e3397e'
+              url='https://wa.link/bgn9q7'
               tooltipContent='WhatsApp'
               tooltipId='whatsapp'
             >
@@ -39,7 +39,7 @@ const Footer = () => {
 
           <Tooltip tooltipId='telegram'>
             <Social
-              url='http://t.me/estif1727'
+              url='https://t.me/theoneraphael'
               tooltipContent='Telegram'
               tooltipId='telegram'
             >
@@ -53,7 +53,7 @@ const Footer = () => {
           <Tooltip tooltipId='source-code'>
             <StyledLink
               theme={systemTheme}
-              href='http://github.com/Estifanos12/OpenType'
+              href='https://github.com/iraphaelfernandes/training_typing'
               target='_blank'
               rel='noopener noreferrer'
               className='font-mono text-xl hover:underline'

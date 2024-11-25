@@ -77,7 +77,7 @@ const AboutPage = () => {
           <BsGithub className='text-xl font-bold' />
           <h2 className='text-xl font-bold'>Source code:</h2>
           <a
-            href='http://github.com/Estifanos12/OpenType'
+            href='https://github.com/iraphaelfernandes/training_typing'
             target='_blank'
             className='hover:underline'
             rel='noopener noreferrer'
