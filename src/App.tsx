@@ -1,19 +1,19 @@
-import { useDetectDevice } from './hooks/useDetectDevice';
-import { useSystem } from './hooks/useSystem';
-import { useThemeContext } from './hooks/useTheme';
+import { useDetectDevice } from "./hooks/useDetectDevice";
+import { useSystem } from "./hooks/useSystem";
+import { useThemeContext } from "./hooks/useTheme";
 
-import AboutPage from './components/About';
-import Countdown from './components/Countdown';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import ModalComponent from './components/Modal';
-import ModalContent from './components/ModalContent';
-import Restart from './components/Restart';
-import TimeCategory from './components/TimeCategory';
-import UserTyped from './components/UserTyped';
-import WordContainer from './components/WordContainer';
-import WordWrapper from './components/WordWrapper';
-import MobileNotSupported from './components/MobileNotSupported';
+import AboutPage from "./components/About";
+import Countdown from "./components/Countdown";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import ModalComponent from "./components/Modal";
+import ModalContent from "./components/ModalContent";
+import Restart from "./components/Restart";
+import TimeCategory from "./components/TimeCategory";
+import UserTyped from "./components/UserTyped";
+import WordContainer from "./components/WordContainer";
+import WordWrapper from "./components/WordWrapper";
+import MobileNotSupported from "./components/MobileNotSupported";
 
 function App() {
   const { systemTheme } = useThemeContext();
@@ -41,14 +41,14 @@ function App() {
 
   return (
     <div
-      className='h-screen w-full overflow-y-auto'
+      className="h-screen w-full overflow-y-auto"
       style={{
         backgroundColor: systemTheme.background.primary,
         color: systemTheme.text.primary,
       }}
     >
       <main
-        className=' mx-auto flex h-full max-w-5xl flex-col gap-4 px-4 xl:px-0'
+        className=" mx-auto flex h-full max-w-5xl flex-col gap-4 px-4 xl:px-0"
         style={{}}
       >
         {isMobile ? (
@@ -81,7 +81,7 @@ function App() {
             <Restart restart={restartTest} />
             <Footer />
             <ModalComponent
-              type='result'
+              type="result"
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
             >
@@ -93,7 +93,7 @@ function App() {
             </ModalComponent>
 
             <ModalComponent
-              type='about'
+              type="about"
               isOpen={aboutModal}
               onRequestClose={closeModal}
             >
@@ -107,3 +107,4 @@ function App() {
 }
 
 export default App;
+// test comment
