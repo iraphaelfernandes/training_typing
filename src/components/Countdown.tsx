@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { useThemeContext } from '../hooks/useTheme';
+import { useThemeContext } from "../hooks/useTheme";
 
 type CountdownProps = {
   countdown: number;
@@ -10,6 +10,7 @@ type CountdownProps = {
 const Countdown = ({ countdown, reset }: CountdownProps) => {
   useEffect(() => {
     reset();
+    console.log("DEBUG: Component Countdown was called.");
   }, [reset]);
 
   const formatedCountdown = {
@@ -20,15 +21,15 @@ const Countdown = ({ countdown, reset }: CountdownProps) => {
   const { systemTheme } = useThemeContext();
 
   return (
-    <div className='flex justify-end'>
+    <div className="flex justify-end">
       <div
-        className=' rounded-lg p-3'
+        className=" rounded-lg p-3"
         style={{
           backgroundColor: systemTheme.background.secondary,
         }}
       >
         <span
-          className='text-right font-mono text-lg lg:text-xl'
+          className="text-right font-mono text-lg lg:text-xl"
           style={{
             color: systemTheme.text.secondary,
           }}
