@@ -67,3 +67,7 @@ npm run build or yarn build
 ## Acknowledgement
 
 - [MonkeyType](https://www.monkeytype.com) - for the inspiration and design ideas.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.TXT file for details.
