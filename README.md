@@ -1,10 +1,6 @@
-# OpenType 🖮
+# TrainingTyping 🖮
 
-OpenType is a minimalistic typing speed testing app built with React and TailwindCSS that highly inspired by [MonkeyType](https://www.monkeytype.com). The app allows users to test and improve their typing speed and accuracy. The app provides a user-friendly interface and intuitive feedback on typing performance.
-
-## Live Demo
-
-Check out the live demo [here](https://estifanos12.github.io/OpenType/).
+TrainingTyping is a minimalistic typing speed testing app built with React and TailwindCSS that highly inspired by [MonkeyType](https://www.monkeytype.com). The app allows users to test and improve their typing speed and accuracy. The app provides a user-friendly interface and intuitive feedback on typing performance.
 
 ## Current Features
 
@@ -37,13 +33,13 @@ To run this app locally, follow these steps:
 Clone this repository
 
 ```bash
-git clone https://github.com/Estifanos12/OpenType.git
+git clone https://github.com/iraphaelfernandes/training_typing.git
 ```
 
 Navigate to the project directory
 
 ```bash
-cd OpenType
+cd training_typing
 ```
 
 Install dependencies
@@ -64,10 +60,20 @@ Build the project for production
 npm run build or yarn build
 ```
 
+To run tests, run the following command
+
+```bash
+npm test or yarn test
+```
+
 ## Acknowledgement
 
 - [MonkeyType](https://www.monkeytype.com) - for the inspiration and design ideas.
 
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/iraphaelfernandes/)
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.TXT file for details.
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License - see the LICENSE.TXT file for details.
