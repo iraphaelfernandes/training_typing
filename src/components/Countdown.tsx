@@ -1,5 +1,22 @@
-import { useEffect } from "react";
+/**
+ * A countdown timer component that displays remaining time in minutes and seconds.
+ * The component automatically formats the display and handles theme-based styling.
+ *
+ * @component
+ * @param {Object} props
+ * @param {number} props.countdown - The countdown time in milliseconds
+ * @param {() => void} props.reset - Function to reset the countdown timer
+ *
+ * @example
+ * ```tsx
+ * <Countdown
+ *   countdown={120000}
+ *   reset={() => setTimer(initialTime)}
+ * />
+ * ```
+ */
 
+import { useEffect } from "react";
 import { useThemeContext } from "../hooks/useTheme";
 
 type CountdownProps = {

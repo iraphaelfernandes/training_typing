@@ -70,6 +70,18 @@ npm test or yarn test
 
 - [MonkeyType](https://www.monkeytype.com) - for the inspiration and design ideas.
 
+## Documentation
+
+This project uses Storybook for component documentation and testing. Storybook provides a development environment for UI components, allowing you to browse a component library, view different states of each component, and interactively develop and test components.
+
+### Running Documentation
+
+To start the Storybook documentation server:
+
+```bash
+npm run storybook
+```
+This will open Storybook in your default browser, typically at http://localhost:6006.
 
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/iraphaelfernandes/)

@@ -9,7 +9,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended'
   ],
+  ignorePatterns: ['!.storybook'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -25,6 +27,7 @@ module.exports = {
     }
   },
   rules: {
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off'  // Add this to disable the quote escaping error
   }
 }

@@ -1,6 +1,28 @@
+/**
+ * A theme switcher dropdown component that allows users to change the application's theme.
+ * Displays preview dots for each theme's colors (background, primary text, secondary text).
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ThemeDropdown />
+ * ```
+ *
+ * Features:
+ * - Displays current theme colors in button
+ * - Dropdown with list of available themes
+ * - Visual preview of each theme's colors
+ * - Clicking a theme immediately applies it to the application
+ * - Automatically closes when a theme is selected or clicked outside
+ *
+ * Dependencies:
+ * - Requires useDropdown hook for dropdown functionality
+ * - Requires useThemeContext hook for theme management
+ * - Uses theme configuration from utils
+ */
+
 import { useDropdown } from "../hooks/useDropdown";
 import { useThemeContext } from "../hooks/useTheme";
-
 import { theme } from "../utils";
 
 const ThemeDropdown = () => {
