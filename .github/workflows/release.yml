@@ -5,6 +5,8 @@ on:
     tags:
       - 'v*' # Matches tags starting with 'v' (e.g., v1.0.0)
       - '[0-9]+.[0-9]+.[0-9]+' # Matches semantic versioning tags (e.g., 1.0.1)
+    branches:
+      - feature/assignments_for_Lectures_7_8 # Trigger on pushes to this branch
 
 jobs:
   build-and-release:
