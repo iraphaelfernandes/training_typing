@@ -1,32 +1,41 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback } from "react";
 
 export const useCountdown = (initialValue: number, interval = 1000) => {
-  const intervalRef = useRef<NodeJS.Timer | null>(null);
+  const intervalRef = useRef<number | null>(null); // Use `number` for browser environments
   const [countdown, setCountdown] = useState(initialValue);
 
   const startCountdown = useCallback(() => {
-    if (intervalRef.current) return;
-    intervalRef.current = setInterval(() => {
+    if (intervalRef.current !== null) return; // Check if the interval is already running
+    intervalRef.current = window.setInterval(() => {
       setCountdown((prev) => {
         if (prev > 0) {
-          return prev - interval;
+          return prev - 1; // Decrement by 1 (not by `interval`)
         }
-        if (prev === 0) clearInterval(intervalRef.current!);
-
+        if (prev === 0 && intervalRef.current !== null) {
+          clearInterval(intervalRef.current); // Clear the interval when countdown reaches 0
+          intervalRef.current = null;
+        }
         return prev;
       });
     }, interval);
-  }, [initialValue]);
+  }, [interval]);
 
   const resetCountdown = useCallback(() => {
-    clearInterval(intervalRef.current!);
-    intervalRef.current = null;
-    setCountdown(initialValue);
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current); // Clear the interval if it's running
+      intervalRef.current = null;
+    }
+    setCountdown(initialValue); // Reset the countdown to the initial value
   }, [initialValue]);
 
+  // Cleanup the interval when the component unmounts
   useEffect(() => {
-    return () => clearInterval(intervalRef.current!);
-  }, [interval]);
+    return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
   return { countdown, startCountdown, resetCountdown };
 };
