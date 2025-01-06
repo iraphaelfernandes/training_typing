@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useScreenshot from "use-react-screenshot";
+import { useScreenshot } from "use-react-screenshot";
 
 export const useScreenShot = () => {
   const ref = useRef(null);
