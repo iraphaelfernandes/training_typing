@@ -51,6 +51,7 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }} # Add this line
 
       - name: Upload build artifacts
         uses: actions/upload-release-asset@v1
