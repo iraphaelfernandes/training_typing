@@ -40,7 +40,9 @@ jobs:
           CHANGELOG=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD)
           echo "Changelog:"
           echo "$CHANGELOG"
-          echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT # Use Environment Files
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
@@ -51,7 +53,7 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }} # Add this line
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
         uses: actions/upload-release-asset@v1
