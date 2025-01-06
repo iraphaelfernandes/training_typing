@@ -43,7 +43,7 @@ jobs:
           echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT # Use Environment Files
 
       - name: Create GitHub Release
-        uses: actions/create-release@v2
+        uses: actions/create-release@v1
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -51,7 +51,7 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }} # Use the automatically provided token
+          token: ${{ secrets.GITHUB_TOKEN }} # Add this line
 
       - name: Upload build artifacts
         uses: actions/upload-release-asset@v1
