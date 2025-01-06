@@ -33,7 +33,7 @@ jobs:
       - name: Generate changelog
         id: changelog
         run: |
-          git fetch --prune --unshallow --tags
+          git fetch --prune --tags
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^)
           CHANGELOG=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD)
           echo "Changelog:"
@@ -49,7 +49,7 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }} # Add this line
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
         uses: actions/upload-release-asset@v1
