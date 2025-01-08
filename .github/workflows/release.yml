@@ -3,8 +3,15 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - 'v*'            # Matches v1.0.0
+      - '[0-9]+.[0-9]+.[0-9]+'  # Matches 1.0.0
+      - 'release-*'     # Matches release-1.0
+      - 'ver*'          # Matches ver1.0
+      - '*-release'     # Matches 1.0-release
+      - '*-rc*'         # Matches 1.0-rc1
+      - '*-beta*'       # Matches 1.0-beta1
+      - '*-alpha*'      # Matches 1.0-alpha1
+      - '*.*.*'         # Matches ANY pattern with dots
 
 jobs:
   build-and-test:
