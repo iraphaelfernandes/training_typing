@@ -58,6 +58,8 @@ jobs:
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Pass the token as an environment variable
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
@@ -65,7 +67,6 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }} # Explicitly pass the GITHUB_TOKEN
 
       - name: Upload build artifacts
         uses: actions/upload-release-asset@v1.0.2
