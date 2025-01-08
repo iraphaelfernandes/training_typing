@@ -26,13 +26,13 @@ jobs:
           npm config set registry https://registry.npmjs.org/
           npm install
 
-      # Code Style Check - Only errors, ignore warning count
+      # Code Style Check - Only errors
       - name: Run ESLint
         run: npx eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings=-1 --quiet
         
       # Code Smells Analysis - Only errors
       - name: Run TypeScript Compiler Checks
-        run: npx tsc --noEmit --suppressWarnings
+        run: npx tsc --noEmit --noUnusedLocals false --noUnusedParameters false
         
       # Secret Scanning - Critical findings only
       - name: TruffleHog OSS
