@@ -56,23 +56,13 @@ jobs:
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Create GitHub Release
-        id: create_release # Add an ID to reference the step's outputs
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Pass the token as an environment variable
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          body: |
-            ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
+      - name: Zip build artifacts
+        run: zip -r build-artifacts.zip dist/
 
-      - name: Upload build artifacts
-        uses: actions/upload-release-asset@v1.0.2
+      - name: Create/Update GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # Use the output from create-release
-          asset_path: dist/
-          asset_name: build-artifacts.zip
-          asset_content_type: application/zip
+          body: ${{ steps.changelog.outputs.changelog }}
+          files: build-artifacts.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
