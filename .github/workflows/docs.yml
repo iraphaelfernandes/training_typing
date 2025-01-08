@@ -2,7 +2,7 @@ name: Documentation
 on:
   push:
     branches:
-      - main
+      - main  # or master depending on your default branch name
 
 jobs:
   build-and-deploy-docs:
@@ -20,11 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build documentation
-        run: npm run docs  # Adjust this to your documentation build command
+      - name: Build Storybook documentation
+        run: npm run build-storybook
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: docs  # The folder the action should deploy (adjust to your docs output folder)
-          branch: gh-pages  # The branch the action should deploy to
+          folder: storybook-static  # Storybook's default output directory
+          branch: gh-pages
