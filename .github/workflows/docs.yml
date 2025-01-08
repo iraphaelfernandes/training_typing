@@ -2,7 +2,7 @@ name: Documentation
 on:
   push:
     branches:
-      - main
+      - main #test
 
 jobs:
   build-docs:
