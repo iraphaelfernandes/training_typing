@@ -10,14 +10,13 @@ on:
       - feature/assignments_for_Lectures_7_8 # Trigger on pushes to this branch
 
 jobs:
-  build-and-release:
-    runs-on: ubuntu-latest # Use the latest stable version
-
+  build-and-test:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetch all history for changelog generation
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -40,6 +39,19 @@ jobs:
             exit 1
           fi
 
+      - name: Zip build artifacts
+        run: zip -r build-artifacts.zip dist/
+
+  create-release:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Generate changelog
         id: changelog
         run: |
@@ -55,9 +67,6 @@ jobs:
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Zip build artifacts
-        run: zip -r build-artifacts.zip dist/
 
       - name: Create/Update GitHub Release
         uses: softprops/action-gh-release@v1
