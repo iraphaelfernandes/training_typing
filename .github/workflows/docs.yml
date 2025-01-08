@@ -5,7 +5,31 @@ on:
       - main
 
 jobs:
-  build-and-deploy-docs:
+  build-docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    name: Build Docs (Node ${{ matrix.node-version }})
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Storybook documentation
+        run: npm run build-storybook
+
+  deploy-docs:
+    needs: build-docs
     runs-on: ubuntu-latest
     
     steps:
@@ -15,7 +39,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20.x
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
