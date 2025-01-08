@@ -2,7 +2,7 @@ name: Documentation
 on:
   push:
     branches:
-      - main  # or master depending on your default branch name
+      - main
 
 jobs:
   build-and-deploy-docs:
@@ -26,5 +26,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: storybook-static  # Storybook's default output directory
+          folder: storybook-static
           branch: gh-pages
