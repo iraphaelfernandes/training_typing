@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Important for secret scanning history
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -26,22 +26,22 @@ jobs:
           npm config set registry https://registry.npmjs.org/
           npm install
 
-      # Code Style Check
+      # Code Style Check - Only errors
       - name: Run ESLint
-        run: npm run lint
+        run: npm run lint -- --quiet # The --quiet flag suppresses warnings
         
-      # Code Smells Analysis
+      # Code Smells Analysis - Only errors
       - name: Run TypeScript Compiler Checks
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit --suppressWarnings
         
-      # Secret Scanning
+      # Secret Scanning - Critical findings only
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
           head: HEAD
-          extra_args: --debug --only-verified
+          extra_args: --debug --only-verified --fail-verified
 
   build-and-test:
     runs-on: ubuntu-latest
@@ -64,19 +64,14 @@ jobs:
       - name: Install dependencies
         run: |
           npm config set registry https://registry.npmjs.org/
-          npm config set fetch-retry-maxtimeout 600000
-          npm install --no-audit --prefer-offline --maxsockets 1
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm install --no-audit
         continue-on-error: true
 
       - name: Retry Install on Failure
         if: failure()
         run: |
           npm cache clean --force
-          npm install --no-audit --verbose
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm install --no-audit
 
       - name: Run tests
         run: npm test
