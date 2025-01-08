@@ -7,6 +7,42 @@ on:
     branches: [ main ]
 
 jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Important for secret scanning history
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm install
+
+      # Code Style Check
+      - name: Run ESLint
+        run: npm run lint
+        
+      # Code Smells Analysis
+      - name: Run TypeScript Compiler Checks
+        run: npx tsc --noEmit
+        
+      # Secret Scanning
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
   build-and-test:
     runs-on: ubuntu-latest
     strategy:
