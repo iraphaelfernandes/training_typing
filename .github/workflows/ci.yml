@@ -2,12 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-      - feature/*
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build-and-test:
@@ -15,6 +12,8 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x]
+
+    name: Build & Test (Node ${{ matrix.node-version }})
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -23,12 +22,28 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm config set fetch-retry-maxtimeout 600000
+          npm install --no-audit --prefer-offline --maxsockets 1
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
+
+      - name: Retry Install on Failure
+        if: failure()
+        run: |
+          npm cache clean --force
+          npm install --no-audit --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Run tests
+        run: npm test
 
       - name: Build project
         run: npm run build
-
-      - name: Run unit tests
-        run: npm test
