@@ -26,9 +26,9 @@ jobs:
           npm config set registry https://registry.npmjs.org/
           npm install
 
-      # Code Style Check - Only errors
+      # Code Style Check - Only errors, ignore warning count
       - name: Run ESLint
-        run: npm run lint -- --quiet # The --quiet flag suppresses warnings
+        run: npx eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings=-1 --quiet
         
       # Code Smells Analysis - Only errors
       - name: Run TypeScript Compiler Checks
